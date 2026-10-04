@@ -1,0 +1,197 @@
+/* Fixed app chrome: status bar, header, bottom navigation, and the page scroller */
+
+.page {
+  position: absolute;
+  inset: 0;
+  padding-top: var(--page-top);
+  padding-bottom: 120px; /* clears the bottom navigation */
+  background: var(--color-surface);
+  cursor: grab;
+}
+
+/* ---------- Status bar ---------- */
+.status-bar {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  width: var(--screen-w);
+  height: var(--status-bar-h);
+  background: var(--color-surface);
+  pointer-events: none;
+}
+
+.status-bar img {
+  position: absolute;
+}
+
+.status-bar__time {
+  left: 20px;
+  top: 16px;
+}
+
+.status-bar__cell {
+  left: 288px;
+  top: 17.67px;
+}
+
+.status-bar__wifi {
+  left: 310px;
+  top: 17.33px;
+}
+
+.status-bar__battery {
+  right: 20.33px;
+  top: 17.33px;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  position: absolute;
+  z-index: 20;
+  top: var(--status-bar-h);
+  left: 0;
+  width: var(--screen-w);
+  height: var(--header-h);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-surface);
+  /* Position and opacity are spring-animated from App.js */
+  will-change: transform, opacity;
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+}
+
+/* Extends the tap target to 44px without moving the layout */
+.icon-btn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+}
+
+.scan-btn {
+  width: 100px;
+  height: 40px;
+  border-radius: var(--radius-full);
+}
+
+.scan-btn img {
+  width: 100px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* ---------- Bottom navigation ---------- */
+.bottom-nav {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  bottom: 0;
+  width: var(--screen-w);
+  height: var(--bottom-nav-h);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.bottom-nav__scrim {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 249, 252, 0) 10%,
+    var(--color-surface-blur) 38.167%,
+    var(--color-surface-blur) 80.417%
+  );
+}
+
+.bottom-nav__bar {
+  position: absolute;
+  top: 64px;
+  left: var(--gutter);
+  width: 343px;
+  height: 64px;
+  border: 1px solid var(--color-border-nav);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  pointer-events: auto;
+}
+
+.bottom-nav__indicator {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 100px;
+  height: 56px;
+  border: 1px solid var(--color-border-nav);
+  border-radius: var(--radius-full);
+  background: #fbfcfd;
+  will-change: transform;
+}
+
+.bottom-nav__items {
+  position: absolute;
+  inset: -1px;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding: 4px 32px;
+  margin: 0;
+  list-style: none;
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: var(--fs-10);
+  line-height: var(--lh-12);
+  white-space: nowrap;
+  color: var(--color-text);
+  transition: color var(--dur-standard) var(--ease-out);
+}
+
+.bottom-nav__icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  transition:
+    filter var(--dur-standard) var(--ease-out),
+    transform var(--dur-standard) var(--ease-out);
+}
+
+.bottom-nav__item[aria-current="page"] {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.bottom-nav__item[aria-current="page"] .bottom-nav__icon {
+  transform: translateY(-0.5px) scale(1.04);
+}
+
+/* Only the selected Manage glyph is coloured in the design */
+.bottom-nav__item--brand:not([aria-current="page"]) .bottom-nav__icon {
+  filter: grayscale(1) brightness(0.35);
+}

@@ -1,0 +1,95 @@
+/* Desktop presentation: a dark stage with the phone centered on it */
+.stage {
+  --phone-scale: 1;
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 700px at 50% 35%, #23262d 0%, rgba(35, 38, 45, 0) 70%),
+    #0e0f12;
+}
+
+.phone {
+  --bezel: 12px;
+  position: relative;
+  flex: none;
+  width: calc(var(--screen-w) + var(--bezel) * 2);
+  height: calc(var(--screen-h) + var(--bezel) * 2);
+  padding: var(--bezel);
+  border-radius: 56px;
+  background: linear-gradient(145deg, #3a3c42 0%, #17181b 38%, #0b0b0d 100%);
+  box-shadow:
+    inset 0 0 0 1.5px #55585f,
+    inset 0 0 0 4px #0a0a0b,
+    0 40px 80px -20px rgba(0, 0, 0, 0.7),
+    0 18px 36px -18px rgba(0, 0, 0, 0.6);
+  transform: scale(var(--phone-scale));
+  transform-origin: center;
+}
+
+/* Hardware buttons */
+.phone::before,
+.phone::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: #2a2c31;
+}
+
+.phone::before {
+  left: -3px;
+  top: 150px;
+  height: 34px;
+  box-shadow:
+    0 64px 0 0 #2a2c31,
+    0 78px 0 0 #2a2c31,
+    0 128px 0 0 #2a2c31,
+    0 142px 0 0 #2a2c31;
+}
+
+.phone::after {
+  right: -3px;
+  top: 210px;
+  height: 92px;
+}
+
+/* The screen is always exactly 375 × 812; only the outer phone is scaled */
+.phone__screen {
+  position: relative;
+  width: var(--screen-w);
+  height: var(--screen-h);
+  border-radius: 44px;
+  overflow: hidden;
+  background: var(--color-surface);
+  isolation: isolate;
+  user-select: none;
+}
+
+.phone__island {
+  position: absolute;
+  z-index: 40;
+  top: 8px;
+  left: 50%;
+  width: 104px;
+  height: 29px;
+  margin-left: -52px;
+  border-radius: 20px;
+  background: #000;
+  pointer-events: none;
+}
+
+.phone__home-indicator {
+  position: absolute;
+  z-index: 40;
+  left: 50%;
+  bottom: 8px;
+  width: 134px;
+  height: 5px;
+  margin-left: -67px;
+  border-radius: 3px;
+  background: #0b0b0d;
+  pointer-events: none;
+}

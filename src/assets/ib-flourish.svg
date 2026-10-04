@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="Flourish for toggle" d="M32 1C49.1208 1 63 14.8792 63 32C63 49.1208 49.1208 63 32 63C14.8792 63 1 49.1208 1 32C1 14.8792 14.8792 1 32 1Z" stroke="url(#paint0_linear_0_483)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_0_483" x1="32" y1="1.06743" x2="32.0001" y2="62" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F9080F"/>
+<stop offset="0.432692" stop-color="#FFBE09"/>
+<stop offset="1" stop-color="#986FFB"/>
+</linearGradient>
+</defs>
+</svg>

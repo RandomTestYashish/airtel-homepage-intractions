@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="109" height="119" viewBox="0 0 109 119" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 1597881685">
+<mask id="mask0_0_142" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="109" height="119">
+<rect id="Rectangle 161124092" width="109" height="119" rx="16" fill="url(#paint0_linear_0_142)"/>
+</mask>
+<g mask="url(#mask0_0_142)">
+<circle id="Ellipse 19133" cx="76" cy="17" r="48" fill="#E91111"/>
+<circle id="Ellipse 19132" cx="76.5" cy="17.5" r="34.5" fill="#D40000" fill-opacity="0.7"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_142" x1="54.5" y1="0" x2="54.5" y2="119" gradientUnits="userSpaceOnUse">
+<stop stop-color="#491699"/>
+<stop offset="1" stop-color="#180733"/>
+</linearGradient>
+</defs>
+</svg>

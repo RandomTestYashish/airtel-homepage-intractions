@@ -1,0 +1,72 @@
+/* Design tokens lifted from the Figma variables. Edit here, not in components. */
+:root {
+  /* Canvas */
+  --screen-w: 375px;
+  --screen-h: 812px;
+  --status-bar-h: 44px;
+  --header-h: 72px;
+  --page-top: 125px; /* where page content starts, below status bar and header */
+  --bottom-nav-h: 152px;
+  --gutter: 16px;
+
+  /* Color */
+  --color-text: #292c31;
+  --color-text-title: #3e4146;
+  --color-text-muted: #656565;
+  --color-text-inverse: #ffffff;
+  --color-accent: #fd2f36;
+  --color-accent-start: #fc5252;
+  --color-accent-stop: #e32121;
+  --color-link: #075ee8;
+  --color-warning: #da9802;
+  --color-blue-700: #04388b;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f0f4f9;
+  --color-surface-pressed: #cdd3dd;
+  --color-surface-blur: #f7f9fc;
+  --color-card-start: #ffffff;
+  --color-card-stop: #f5f5f5;
+  --color-border-card: #e6e9ef;
+  --color-border-nav: #e6f0ff;
+  --color-ghost-text: #485b76;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 12px;
+  --radius-lg: 16px;
+  --radius-full: 100px;
+
+  /* Type */
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --fs-10: 10px;
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --lh-12: 12px;
+  --lh-14: 14px;
+  --lh-16: 16px;
+  --lh-18: 18px;
+  --lh-20: 20px;
+  --tracking-title: 1.76px;
+
+  /* Shadow */
+  --shadow-card: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.04));
+  --shadow-icon: drop-shadow(0 5px 2.81px rgba(143, 165, 227, 0.2));
+  --shadow-icon-ring: drop-shadow(0 4px 5px rgba(4, 56, 139, 0.1));
+
+  /* Motion (springs live in src/lib/motion.js) */
+  --dur-fast: 160ms;
+  --dur-standard: 300ms;
+  --dur-large: 420ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-standard: 1ms;
+    --dur-large: 1ms;
+  }
+}

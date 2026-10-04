@@ -1,0 +1,123 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  font-feature-settings: "liga" 0;
+  color: var(--color-text);
+  background: #0e0f12;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Tappable elements. The press scale itself is a spring driven from src/lib/press.js. */
+.pressable {
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out);
+}
+
+.pressable:active {
+  opacity: 0.92;
+}
+
+@media (hover: hover) {
+  .pressable:hover {
+    filter: brightness(0.985);
+  }
+}
+
+.icon--flip {
+  transform: scaleX(-1);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+/* The page scroller: native momentum, no visible scrollbar */
+.scroll-y {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  touch-action: pan-y;
+}
+
+.scroll-y::-webkit-scrollbar {
+  display: none;
+}
+
+/* Set while a mouse drag (or its momentum) is driving a scroller or rail */
+.is-dragging {
+  scroll-behavior: auto !important;
+  cursor: grabbing !important;
+}
+
+/* ---------- Infinite rail (see src/lib/rail.js) ---------- */
+.rail {
+  width: var(--screen-w);
+  overflow: hidden;
+  cursor: grab;
+  /* Vertical pans stay with the page; horizontal ones are handled by the rail */
+  touch-action: pan-y;
+}
+
+.rail__track {
+  position: relative;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.rail__track > * {
+  flex: none;
+  margin-right: var(--rail-gap, 16px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
