@@ -8,8 +8,9 @@ const VARIANTS = [
 
 /**
  * Preview control for switching between versions of the prototype. The choice
- * lives in the URL (`?v=2`), so a link opens on the same version; on phones the
- * control is hidden and the URL is the only switch.
+ * lives in the URL (`?v=2`), so a link opens on the same version. On desktop it
+ * is a labelled list beside the phone; on phones CSS turns it into a small pill
+ * floating at the right edge that shows only "V1 / V2 / V3".
  */
 export function VariantSwitch({ onChange }) {
   const params = new URLSearchParams(location.search);
@@ -20,7 +21,9 @@ export function VariantSwitch({ onChange }) {
       ${VARIANTS.map(
         (variant) => `
         <button class="variant-switch__button" type="button" data-variant="${variant.id}"
-          aria-pressed="${variant.id === current}"><strong>${variant.name}</strong>${variant.text}</button>`,
+          aria-pressed="${variant.id === current}" aria-label="${variant.name}: ${variant.text}">
+          <strong>${variant.name}</strong><span class="variant-switch__text">${variant.text}</span>
+        </button>`,
       ).join("")}
     </fieldset>
   `);

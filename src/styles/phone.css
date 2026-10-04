@@ -177,8 +177,7 @@
 .is-mobile .phone::after,
 .is-mobile .phone__island,
 .is-mobile .phone__home-indicator,
-.is-mobile .status-bar,
-.is-mobile .variant-switch {
+.is-mobile .status-bar {
   display: none;
 }
 
@@ -187,4 +186,50 @@
   height: 100vh;
   height: 100dvh;
   border-radius: 0;
+}
+
+/* On phones the version switch floats over the design: a slim pill at the right edge,
+   halfway down, clear of the header, the category row and the bottom navigation. */
+.is-mobile .variant-switch {
+  position: fixed;
+  z-index: 60;
+  top: 50%;
+  right: 6px;
+  left: auto;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 20px;
+  background: rgba(24, 25, 28, 0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  transform: translateY(-50%);
+}
+
+.is-mobile .variant-switch__text {
+  display: none;
+}
+
+.is-mobile .variant-switch__button {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 17px;
+  background: none;
+  font-size: 11px;
+}
+
+/* 34px looks right; the tap target is widened to 44px, into the screen edge and the gaps */
+.is-mobile .variant-switch__button::after {
+  content: "";
+  position: absolute;
+  inset: -1px -6px -1px -10px;
+}
+
+.is-mobile .variant-switch__button[aria-pressed="true"] {
+  background: #fff;
 }
