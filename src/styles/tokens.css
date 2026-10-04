@@ -55,6 +55,11 @@
   --shadow-icon: drop-shadow(0 5px 2.81px rgba(143, 165, 227, 0.2));
   --shadow-icon-ring: drop-shadow(0 4px 5px rgba(4, 56, 139, 0.1));
 
+  /* Glass (V3): translucent surface over a blurred, slightly saturated backdrop */
+  --glass-surface: rgba(255, 255, 255, 0.62);
+  --glass-filter: saturate(180%) blur(22px);
+  --glass-edge: rgba(255, 255, 255, 0.7);
+
   /* Motion (springs live in src/lib/motion.js) */
   --dur-fast: 160ms;
   --dur-standard: 300ms;

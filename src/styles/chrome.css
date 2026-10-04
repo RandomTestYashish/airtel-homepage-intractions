@@ -195,3 +195,37 @@
 .bottom-nav__item--brand:not([aria-current="page"]) .bottom-nav__icon {
   filter: grayscale(1) brightness(0.35);
 }
+
+/* ---------- V3: iOS-style glass on the header, category tabs and bottom navigation ---------- */
+/* The status bar stays solid white, as in V1 */
+[data-variant="3"] .app-header,
+[data-variant="3"] .category-tabs {
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
+}
+
+/* The hairline under the pinned tabs becomes a soft light edge */
+[data-variant="3"] .category-tabs::after {
+  background: rgba(41, 44, 49, 0.1);
+}
+
+/* Floating glass pill: no fade behind it, the page shows through around and under it */
+[data-variant="3"] .bottom-nav__scrim {
+  display: none;
+}
+
+[data-variant="3"] .bottom-nav__bar {
+  border-color: var(--glass-edge);
+  background: var(--glass-surface);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
+  box-shadow:
+    0 10px 30px rgba(41, 44, 49, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+[data-variant="3"] .bottom-nav__indicator {
+  border-color: var(--glass-edge);
+  background: rgba(255, 255, 255, 0.55);
+}

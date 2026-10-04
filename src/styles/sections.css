@@ -50,14 +50,16 @@
  */
 .category-tabs {
   --compact: 0;
-  --compact-shift: calc(var(--compact) * -22px); /* 64px tile shrinking to 42px */
+  --compact-distance: 22px; /* how much shorter the bar gets: a 64px tile shrinking to 42px */
+  --compact-pad: 14px; /* space above the tiles once pinned; matches the gap between tile and title */
+  --compact-shift: calc(var(--compact) * (var(--compact-pad) - var(--compact-distance)));
   position: sticky;
   z-index: 10;
   /* Sticky offsets start from the scroller's padding edge, hence the subtraction */
   top: calc(var(--status-bar-h) - var(--page-top));
   height: 110px;
   background: var(--color-surface);
-  clip-path: inset(0 0 calc(var(--compact) * 22px) 0);
+  clip-path: inset(0 0 calc(var(--compact) * (var(--compact-distance) - var(--compact-pad))) 0);
   will-change: transform;
 }
 
@@ -73,8 +75,19 @@
 
 .category-tab__scaler {
   display: block;
-  transform: scale(calc(1 - 0.34 * var(--compact)));
+  transform: translateY(calc(var(--compact) * var(--compact-pad))) scale(calc(1 - 0.34 * var(--compact)));
   transform-origin: 50% 0;
+}
+
+/* V2: once scrolled, the icon tiles fade away and only the titles remain */
+[data-variant="2"] .category-tabs {
+  --compact-distance: 72px; /* the 64px tile plus the 8px gap under it */
+  --compact-pad: 10px; /* puts as much space above the title text as there is below it */
+}
+
+[data-variant="2"] .category-tab__scaler {
+  transform: translateY(calc(var(--compact) * var(--compact-pad))) scale(calc(1 - 0.5 * var(--compact)));
+  opacity: calc(1 - 1.6 * var(--compact)); /* gone a little before the labels arrive */
 }
 
 .category-tab {

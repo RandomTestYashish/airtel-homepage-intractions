@@ -16,6 +16,7 @@ import { NextBestAction } from "./components/NextBestAction.js";
 import { PhoneFrame } from "./components/PhoneFrame.js";
 import { ProductShowcase } from "./components/ProductShowcase.js";
 import { StatusBar } from "./components/StatusBar.js";
+import { VariantSwitch } from "./components/VariantSwitch.js";
 
 const BUY_PRODUCTS = [
   { label: "Insta EMI Card", image: "tile-emi.png" },
@@ -160,6 +161,10 @@ export function App() {
 
   requestAnimationFrame(measureChrome); // needs layout, so wait until mounted
   window.addEventListener("resize", measureChrome);
+
+  // V2 changes how the category tabs look once scrolled (sections.css); V3 is V1 with
+  // glass surfaces on the header, tabs and bottom nav (chrome.css).
+  stage.append(VariantSwitch({ onChange: (variant) => (screen.dataset.variant = variant) }));
 
   revealOnScroll(page);
   enablePressFeedback(screen);
