@@ -5,7 +5,7 @@
   --screen-h: 812px;
   --status-bar-h: 44px;
   --header-h: 72px;
-  --page-top: 125px; /* where page content starts, below status bar and header */
+  --page-top: calc(var(--status-bar-h) + 81px); /* where page content starts, below status bar and header */
   --bottom-nav-h: 152px;
   --gutter: 16px;
 

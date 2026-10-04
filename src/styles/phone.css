@@ -93,3 +93,43 @@
   background: #0b0b0d;
   pointer-events: none;
 }
+
+/* ---------- Mobile web: no mockup, the screen is the whole viewport ---------- */
+.is-mobile {
+  --status-bar-h: 0px; /* the real device draws its own status bar */
+}
+
+.is-mobile body {
+  background: var(--color-surface);
+  touch-action: manipulation;
+}
+
+.is-mobile .stage {
+  display: block;
+  background: var(--color-surface);
+}
+
+.is-mobile .phone {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.is-mobile .phone::before,
+.is-mobile .phone::after,
+.is-mobile .phone__island,
+.is-mobile .phone__home-indicator,
+.is-mobile .status-bar {
+  display: none;
+}
+
+.is-mobile .phone__screen {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  border-radius: 0;
+}

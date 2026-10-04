@@ -12,6 +12,9 @@ python3 -m http.server 3000
 
 Then open http://localhost:3000.
 
+On a desktop browser the screen is shown inside an iPhone mockup. On a phone the mockup is dropped and
+the screen fills the browser. Add `?view=mobile` or `?view=mockup` to the URL to force either mode.
+
 ## Layout
 
 - `index.html` – entry page

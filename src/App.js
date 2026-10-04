@@ -35,9 +35,7 @@ const QUICK_LINKS = [
 ];
 
 const HERO_RANGE = 260; // px of scroll over which the hero card eases back
-const STATUS_BAR = 44;
 const HEADER_HEIGHT = 72;
-const PAGE_TOP = 125; // where the category tabs sit at scrollTop 0
 const TABS_COMPACT_AT = 16; // scrolling past this shrinks the tabs…
 const TABS_NORMAL_AT = 9; // …and they stay small until the page is back up here
 
@@ -87,13 +85,20 @@ export function App() {
   let headerShown = 1; // 1 = fully visible, 0 = fully hidden
   let headerAnimation = null;
   let scrollY = 0;
+  let statusBar = 44; // height of the mockup's status bar; 0 on a real phone
+  let pageTop = 125; // where the category tabs sit at scrollTop 0
+  function measureChrome() {
+    statusBar = header.offsetTop;
+    pageTop = parseFloat(getComputedStyle(page).paddingTop);
+    layoutChrome();
+  }
   function layoutChrome() {
     const visible = HEADER_HEIGHT * headerShown;
     header.style.transform = `translate3d(0, ${visible - HEADER_HEIGHT}px, 0)`; // translateY(-100%) when hidden
     header.style.opacity = 0.6 + 0.4 * headerShown;
 
-    const pinned = Math.max(PAGE_TOP - scrollY, STATUS_BAR); // where position: sticky puts the tabs
-    const clearance = Math.max(0, STATUS_BAR + visible - pinned);
+    const pinned = Math.max(pageTop - scrollY, statusBar); // where position: sticky puts the tabs
+    const clearance = Math.max(0, statusBar + visible - pinned);
     tabs.style.transform = clearance ? `translate3d(0, ${clearance}px, 0)` : "";
   }
 
@@ -146,6 +151,9 @@ export function App() {
 
   // Keyboard users must never land on a control that is translated off screen.
   [header, bottomNav].forEach((bar) => bar.addEventListener("focusin", scrollMotion.reveal));
+
+  requestAnimationFrame(measureChrome); // needs layout, so wait until mounted
+  window.addEventListener("resize", measureChrome);
 
   revealOnScroll(page);
   enablePressFeedback(screen);
