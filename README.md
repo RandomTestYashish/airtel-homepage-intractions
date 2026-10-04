@@ -7,8 +7,11 @@ vendored in `src/vendor/` so nothing is installed or fetched at runtime.
 ## Run
 
 ```
-python3 -m http.server 3000
+python3 serve.py
 ```
+
+`serve.py` is Python's built-in file server with browser caching switched off, so a normal refresh
+always shows the latest files.
 
 Then open http://localhost:3000.
 

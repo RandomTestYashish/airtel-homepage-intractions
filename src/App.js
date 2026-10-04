@@ -7,6 +7,7 @@ import { BottomNavigation } from "./components/BottomNavigation.js";
 import { CuratedBanners, FeaturingFresh, RechargeForOthers, YouMightLike } from "./components/Carousels.js";
 import { CategoryTabs } from "./components/CategoryTabs.js";
 import { ExploreProducts } from "./components/ExploreProducts.js";
+import { HamburgerMenu } from "./components/HamburgerMenu.js";
 import { Header } from "./components/Header.js";
 import { IconActionGrid } from "./components/IconActionGrid.js";
 import { IllustrativeGrid } from "./components/IllustrativeGrid.js";
@@ -60,13 +61,18 @@ export function App() {
     ProductShowcase(),
   );
 
-  const header = Header();
+  // The header's menu button opens the side drawer over the home screen; while it
+  // is open, everything behind it is taken out of the tab order.
+  const menu = HamburgerMenu({
+    onOpenChange: (open) => [page, header, bottomNav].forEach((layer) => (layer.inert = open)),
+  });
+  const header = Header({ onMenu: menu.open });
   const bottomNav = BottomNavigation({
     // Choosing a destination returns the page to the top, as native tab bars do.
     onSelect: () => page.scrollTo({ top: 0, behavior: "smooth" }),
   });
 
-  screen.append(page, StatusBar(), header, bottomNav);
+  screen.append(page, StatusBar(), header, bottomNav, menu.element);
 
   // Scroll-linked: the hero card recedes very slightly as the page moves under the header.
   const heroCard = hero.querySelector(".nba__card");

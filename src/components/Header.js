@@ -1,9 +1,9 @@
 import { asset, el } from "../lib/dom.js";
 
-export function Header() {
-  return el(`
+export function Header({ onMenu } = {}) {
+  const header = el(`
     <header class="app-header">
-      <button class="icon-btn pressable" type="button" aria-label="Menu">
+      <button class="icon-btn pressable app-header__menu" type="button" aria-label="Menu" aria-haspopup="dialog">
         <img src="${asset("hdr-back.svg")}" alt="" />
       </button>
       <div class="app-header__actions">
@@ -16,4 +16,7 @@ export function Header() {
       </div>
     </header>
   `);
+
+  header.querySelector(".app-header__menu").addEventListener("click", () => onMenu?.());
+  return header;
 }
