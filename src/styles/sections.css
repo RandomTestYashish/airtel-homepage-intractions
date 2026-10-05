@@ -176,20 +176,18 @@
   opacity: 0;
 }
 
-.category-tab__underline {
+/* The active line. Its horizontal position is set from CategoryTabs.js */
+.category-tabs__indicator {
   translate: 0 var(--compact-shift);
   position: absolute;
   bottom: 0;
-  left: 16px;
+  left: 0;
   width: 32px;
   height: 2px;
   border-radius: var(--radius-full);
   background: linear-gradient(to top, var(--color-accent-start), var(--color-accent-stop));
-  transform: scaleX(0);
-  opacity: 0;
-  transition:
-    transform var(--dur-standard) var(--ease-out),
-    opacity var(--dur-fast) var(--ease-out);
+  pointer-events: none;
+  will-change: transform;
 }
 
 .category-tab[aria-selected="true"] .category-tab__selected,
@@ -199,11 +197,6 @@
 
 .category-tab[aria-selected="true"] .category-tab__label span:first-child {
   opacity: 0;
-}
-
-.category-tab[aria-selected="true"] .category-tab__underline {
-  transform: scaleX(1);
-  opacity: 1;
 }
 
 /* ---------- Next best action ---------- */

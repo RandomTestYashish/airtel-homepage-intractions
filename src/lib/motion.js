@@ -17,6 +17,7 @@ const TRANSITIONS = {
   drawerOut: { duration: 0.4, ease: [0.45, 0, 0.15, 1] },
   scrimIn: { duration: 0.48, ease: "easeInOut" },
   scrimOut: { duration: 0.36, ease: "easeInOut" },
+  indicator: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }, // active-tab line sliding to the new tab
   chevron: { duration: 0.42, ease: [0.4, 0, 0.2, 1] }, // menu chevron morph: no spring, so no overshoot
   bar: spring(0.28), // bottom nav following the scroll direction
   settle: spring(0.38, 0.16), // bottom nav returning once scrolling rests
