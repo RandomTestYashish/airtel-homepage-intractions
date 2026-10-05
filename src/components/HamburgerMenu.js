@@ -1,4 +1,4 @@
-import { asset, el } from "../lib/dom.js";
+import { el } from "../lib/dom.js";
 import { enableDragScroll } from "../lib/dragScroll.js";
 import { animate, transition } from "../lib/motion.js";
 
@@ -37,7 +37,12 @@ const ROWS = [
 
 const SHOT_SPLIT = 802; // frame y where the design's second screenshot takes over
 const escapeHtml = (text) => text.replace(/&/g, "&amp;");
-const chevron = `<img class="menu-chevron" src="${asset("menu-chevron-down.svg")}" alt="" />`;
+// Inline rather than an <img>: a raster image at a fractional size is drawn pixel-snapped
+// at rest and unsnapped while it turns, so the glyph would shift and thicken as it started.
+const chevron = `
+  <svg class="menu-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <path d="M3 7L10 14L17 7" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>`;
 
 /** A small window onto one of the design's screenshots, at frame position (x, y). */
 function art(x, y, className = "") {

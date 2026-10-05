@@ -79,6 +79,7 @@
   /* The glyph sits slightly below the middle of its box; turn it about its own centre */
   transform-origin: 50% 52.5%;
   transition: transform var(--dur-collapse) var(--ease-in-out);
+  will-change: transform; /* one layer throughout, so it renders the same at rest and mid-turn */
 }
 
 [aria-expanded="true"] > .menu-chevron {
