@@ -3,7 +3,8 @@
  * few meaningful signals: header hidden/shown, bottom nav hidden/shown, scroll
  * progress, and "scrolling has come to rest". The header leaves on a downward
  * scroll and only comes back at the top; the bottom nav also returns on the
- * way up and whenever scrolling rests.
+ * way up and whenever scrolling rests. With `navUntilRest` the bottom nav is
+ * instead put away by travel in either direction and returns only at rest.
  */
 const TOP_ZONE = 6; // px from the top where the chrome is always visible
 const HIDE_DISTANCE = 10; // slow scrolls must travel this far before the chrome hides
@@ -12,7 +13,7 @@ const FAST_DISTANCE = 8;
 const SHOW_DISTANCE = 8; // upward travel that brings the chrome back
 const STOP_DELAY = 400; // ms without scroll events before the page counts as at rest
 
-export function createScrollMotion(page, { onHeader, onNav, onProgress, onScroll }) {
+export function createScrollMotion(page, { onHeader, onNav, onProgress, onScroll, navUntilRest }) {
   let lastY = page.scrollTop;
   let lastTime = performance.now();
   let anchor = lastY;
@@ -69,7 +70,7 @@ export function createScrollMotion(page, { onHeader, onNav, onProgress, onScroll
         setNav(true, "scroll");
       }
     } else if (direction < 0 && anchor - y > SHOW_DISTANCE) {
-      setNav(false, "scroll"); // the header waits for the top of the page
+      setNav(Boolean(navUntilRest?.()), "scroll"); // the header waits for the top of the page
     }
 
     clearTimeout(stopTimer);

@@ -40,6 +40,7 @@ const HERO_RANGE = 260; // px of scroll over which the hero card eases back
 const HEADER_HEIGHT = 72;
 const TABS_COMPACT_AT = 16; // scrolling past this shrinks the tabs…
 const TABS_NORMAL_AT = 9; // …and they stay small until the page is back up here
+const NAV_SHRUNK = 0.86; // V4: how small the bottom nav bar gets while the page is scrolling
 
 export function App() {
   const { stage, screen } = PhoneFrame();
@@ -128,6 +129,19 @@ export function App() {
     });
   }
 
+  // V4 never hides the bottom nav: while the page is scrolling, either way, its bar
+  // scales down in place, and it returns to full size once scrolling rests.
+  const navBar = bottomNav.querySelector(".bottom-nav__bar");
+  const shrinksNav = () => screen.dataset.variant === "4";
+  let navAway = false;
+  function setVariant(variant) {
+    screen.dataset.variant = variant;
+    // Carry the nav's current state over to however this version shows it.
+    screen.dataset.nav = navAway && !shrinksNav() ? "hidden" : "visible";
+    animate(bottomNav, { y: navAway && !shrinksNav() ? "110%" : "0%" }, transition("bar"));
+    animate(navBar, { scale: navAway && shrinksNav() ? NAV_SHRUNK : 1 }, transition("navShrink"));
+  }
+
   const scrollMotion = createScrollMotion(page, {
     onHeader(hidden) {
       screen.dataset.header = hidden ? "hidden" : "visible";
@@ -141,10 +155,17 @@ export function App() {
       });
     },
     onNav(hidden, reason) {
+      navAway = hidden;
+      if (shrinksNav()) {
+        // V4: the bar stays where it is and draws in about its own centre.
+        animate(navBar, { scale: hidden ? NAV_SHRUNK : 1 }, transition(hidden ? "navShrink" : "navGrow"));
+        return;
+      }
       screen.dataset.nav = hidden ? "hidden" : "visible";
       // Returning because the scroll came to rest gets the softer, settling spring.
       animate(bottomNav, { y: hidden ? "110%" : "0%" }, transition(reason === "rest" ? "settle" : "bar"));
     },
+    navUntilRest: () => shrinksNav(),
     onProgress(y) {
       screen.dataset.scrolled = String(y > 4);
       linkHero(y);
@@ -163,8 +184,9 @@ export function App() {
   window.addEventListener("resize", measureChrome);
 
   // V2 changes how the category tabs look once scrolled (sections.css); V3 is V1 with
-  // glass surfaces on the header, tabs and bottom nav (chrome.css).
-  stage.append(VariantSwitch({ onChange: (variant) => (screen.dataset.variant = variant) }));
+  // glass surfaces on the header, tabs and bottom nav (chrome.css); V4 is V1 with a
+  // bottom nav that shrinks in place instead of hiding.
+  stage.append(VariantSwitch({ onChange: setVariant }));
 
   revealOnScroll(page);
   enablePressFeedback(screen);

@@ -4,13 +4,14 @@ const VARIANTS = [
   { id: "1", name: "V1", text: "Top nav small icons" },
   { id: "2", name: "V2", text: "Top nav only titles" },
   { id: "3", name: "V3", text: "Glass effect" },
+  { id: "4", name: "V4", text: "Bottom nav shrinks" },
 ];
 
 /**
  * Preview control for switching between versions of the prototype. The choice
  * lives in the URL (`?v=2`), so a link opens on the same version. On desktop it
  * is a labelled list beside the phone; on phones CSS turns it into a small pill
- * floating at the right edge that shows only "V1 / V2 / V3".
+ * floating at the right edge that shows only "V1 / V2 / V3 / V4".
  */
 export function VariantSwitch({ onChange }) {
   const params = new URLSearchParams(location.search);

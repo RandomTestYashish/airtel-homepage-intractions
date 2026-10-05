@@ -21,6 +21,8 @@ const TRANSITIONS = {
   chevron: { duration: 0.42, ease: [0.4, 0, 0.2, 1] }, // menu chevron morph: no spring, so no overshoot
   bar: spring(0.28), // bottom nav following the scroll direction
   settle: spring(0.38, 0.16), // bottom nav returning once scrolling rests
+  navShrink: spring(0.3), // V4: bottom nav drawing in while the page scrolls
+  navGrow: spring(0.42), // V4: and easing back to full size at rest, without a bounce
   pill: spring(0.34, 0.2),
   reveal: spring(0.5),
   snap: { type: "spring", stiffness: 260, damping: 30 },
