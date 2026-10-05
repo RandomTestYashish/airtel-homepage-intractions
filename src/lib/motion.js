@@ -17,6 +17,7 @@ const TRANSITIONS = {
   drawerOut: { duration: 0.4, ease: [0.45, 0, 0.15, 1] },
   scrimIn: { duration: 0.48, ease: "easeInOut" },
   scrimOut: { duration: 0.36, ease: "easeInOut" },
+  chevron: { duration: 0.42, ease: [0.4, 0, 0.2, 1] }, // menu chevron morph: no spring, so no overshoot
   bar: spring(0.28), // bottom nav following the scroll direction
   settle: spring(0.38, 0.16), // bottom nav returning once scrolling rests
   pill: spring(0.34, 0.2),

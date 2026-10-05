@@ -37,11 +37,21 @@ const ROWS = [
 
 const SHOT_SPLIT = 802; // frame y where the design's second screenshot takes over
 const escapeHtml = (text) => text.replace(/&/g, "&amp;");
-// Inline rather than an <img>: a raster image at a fractional size is drawn pixel-snapped
-// at rest and unsnapped while it turns, so the glyph would shift and thicken as it started.
-const chevron = `
+/**
+ * Chevron outline at `p`: 1 points down, -1 points up, and 0 is a dot at the glyph's centre.
+ * The arms are redrawn rather than scaled or rotated, so the stroke keeps its weight and
+ * the glyph stays centred the whole way through.
+ */
+function chevronPath(p) {
+  const w = (Math.max(Math.abs(p), 0.001) * 7).toFixed(3);
+  const h = p * 3.5;
+  return `M${10 - w} ${(10.5 - h).toFixed(3)}L10 ${(10.5 + h).toFixed(3)}L${10 + +w} ${(10.5 - h).toFixed(3)}`;
+}
+
+// Inline rather than an <img>, so the path can be morphed and stays crisp at its fractional size.
+const Chevron = (open = false) => `
   <svg class="menu-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-    <path d="M3 7L10 14L17 7" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="${chevronPath(open ? -1 : 1)}" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
   </svg>`;
 
 /** A small window onto one of the design's screenshots, at frame position (x, y). */
@@ -57,7 +67,7 @@ function Service({ name, actions, open }, index) {
       <button class="menu-service__row" type="button"
         ${expandable ? `aria-expanded="${Boolean(open)}" aria-controls="menu-service-${index}"` : ""}>
         <span class="menu-service__name">${name}</span>
-        ${chevron}
+        ${Chevron(open)}
       </button>
       ${
         expandable
@@ -82,7 +92,7 @@ function Row({ y, title, text, chevron: hasChevron, services }) {
         ${art(13, y + 22, "menu-row__icon")}
         <span class="menu-row__title">${escapeHtml(title)}</span>
         ${text ? `<span class="menu-row__text">${escapeHtml(text)}</span>` : ""}
-        ${hasChevron ? chevron : ""}
+        ${hasChevron ? Chevron() : ""}
       </button>
       ${
         services
@@ -135,10 +145,26 @@ export function HamburgerMenu({ onOpenChange } = {}) {
   const panel = root.querySelector(".menu__panel");
   const scrim = root.querySelector(".menu__scrim");
 
-  // Anything with aria-expanded toggles the collapsible block that follows it.
+  // Anything with aria-expanded toggles the collapsible block that follows it, and its
+  // chevron folds into a dot and opens out the other way. A tap mid-morph turns it back
+  // from wherever it has got to.
   root.querySelectorAll("[aria-expanded]").forEach((toggle) => {
+    const path = toggle.querySelector(":scope > .menu-chevron path");
+    let p = toggle.getAttribute("aria-expanded") === "true" ? -1 : 1;
+    let morph = null;
+
     toggle.addEventListener("click", () => {
-      toggle.setAttribute("aria-expanded", String(toggle.getAttribute("aria-expanded") !== "true"));
+      const open = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(open));
+      morph?.stop();
+      morph = animate(p, open ? -1 : 1, {
+        ...transition("chevron"),
+        onUpdate(value) {
+          p = value;
+          path.setAttribute("d", chevronPath(p));
+          path.style.opacity = 1 - 0.45 * (1 - Math.abs(p)) ** 2; // thins out a little as it becomes the dot
+        },
+      });
     });
   });
 
