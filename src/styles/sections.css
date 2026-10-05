@@ -180,6 +180,7 @@
 .category-tabs__indicator {
   translate: 0 var(--compact-shift);
   position: absolute;
+  z-index: 1; /* over the hairline that appears under the pinned row */
   bottom: 0;
   left: 0;
   width: 32px;
