@@ -256,6 +256,29 @@ export function createRail(root, { pad = 16, loop = true, snap = false, startInd
     if (box.left < frameBox.left || box.right > frameBox.right) centreOn(item);
   });
 
+  /**
+   * Re-measure after the items' size or spacing changes, optionally with a new
+   * leading inset. Only for rails with two ends: a looping rail's clones are
+   * built once from the first layout.
+   */
+  function refresh(nextPad = pad) {
+    pad = nextPad;
+    if (loop || !ready) return; // not laid out yet: the first layout picks the inset up
+    halt();
+    const children = [...track.children];
+    viewport = root.clientWidth;
+    setWidth = children.reduce(
+      (sum, item) => sum + item.offsetWidth + parseFloat(getComputedStyle(item).marginRight),
+      0,
+    );
+    itemWidth = children[0].offsetWidth;
+    pitch = setWidth / children.length;
+    maxOffset = Math.max(0, pad + setWidth - viewport);
+    items = children.map((el) => ({ el, centre: el.offsetLeft + el.offsetWidth / 2 }));
+    offset = clamp(offset);
+    render();
+  }
+
   requestAnimationFrame(layout);
-  return { centreOn };
+  return { centreOn, refresh };
 }

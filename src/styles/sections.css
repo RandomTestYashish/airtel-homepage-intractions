@@ -85,9 +85,106 @@
   --compact-pad: 10px; /* puts as much space above the title text as there is below it */
 }
 
-[data-variant="2"] .category-tab__scaler {
+[data-variant="2"] .category-tab__scaler,
+[data-variant="5"] .category-tab__scaler {
   transform: translateY(calc(var(--compact) * var(--compact-pad))) scale(calc(1 - 0.5 * var(--compact)));
   opacity: calc(1 - 1.6 * var(--compact)); /* gone a little before the labels arrive */
+}
+
+/*
+ * V5: the new top nav. The selected tab is a folder-tab shape that runs into the
+ * page below it, with a filled icon and no tile; the others keep their tiles.
+ * Once scrolled it behaves like V2: the icons and the shape fade away and only
+ * the titles remain, with the sliding line under the selected one.
+ */
+[data-variant="5"] {
+  --page-top: calc(var(--status-bar-h) + var(--header-h)); /* the shape starts where the header ends */
+}
+
+[data-variant="5"] .category-tabs {
+  --rail-gap: 32px;
+  --compact-distance: 74px; /* the 10px above the tile plus the 64px tile */
+  --compact-pad: 10px;
+  height: 111px;
+}
+
+[data-variant="5"] .category-tab {
+  gap: 0;
+  height: 111px;
+  padding-top: 10px;
+}
+
+.category-tabs__box {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible; /* its base line runs past the tab to both edges of the screen */
+  opacity: calc(1 - 1.6 * var(--compact)); /* leaves with the icons */
+  pointer-events: none;
+  will-change: transform;
+}
+
+[data-variant="5"] .category-tabs__box {
+  display: block;
+}
+
+/* Two tints, cross-faded: red for "All", blue for the rest */
+.category-tabs__box g {
+  transition: opacity var(--dur-standard) var(--ease-out);
+}
+
+.category-tabs[data-tone="red"] .category-tabs__box [data-tone="blue"],
+.category-tabs[data-tone="blue"] .category-tabs__box [data-tone="red"] {
+  opacity: 0;
+}
+
+[data-variant="5"] .category-tabs__indicator {
+  opacity: var(--compact); /* the line only belongs to the titles-only state */
+}
+
+[data-variant="5"] .category-tab__selected {
+  display: none;
+}
+
+[data-variant="5"] .category-tab__tile {
+  transition: background-color var(--dur-standard) var(--ease-out);
+}
+
+[data-variant="5"] .category-tab[aria-selected="true"] .category-tab__tile {
+  background-color: transparent;
+}
+
+.category-tab__icon,
+.category-tab__ribbon,
+.category-tab__ribbon-text {
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+/* Doubled class: these must outrank the base .category-tab__icon / ribbon-text rules below */
+.category-tab__icon.category-tab__icon--filled,
+.category-tab__ribbon-text.category-tab__ribbon-text--v5,
+[data-variant="5"] .category-tab__ribbon-text:not(.category-tab__ribbon-text--v5) {
+  display: none;
+}
+
+[data-variant="5"] .category-tab__icon.category-tab__icon--filled {
+  display: grid;
+  opacity: 0;
+}
+
+[data-variant="5"] .category-tab__ribbon-text.category-tab__ribbon-text--v5 {
+  display: block;
+}
+
+[data-variant="5"] .category-tab[aria-selected="true"] .category-tab__icon--filled {
+  opacity: 1;
+}
+
+[data-variant="5"] .category-tab[aria-selected="true"] .category-tab__icon:has(+ .category-tab__icon--filled),
+[data-variant="5"] .category-tab[aria-selected="true"] .category-tab__ribbon,
+[data-variant="5"] .category-tab[aria-selected="true"] .category-tab__ribbon-text {
+  opacity: 0;
 }
 
 .category-tab {

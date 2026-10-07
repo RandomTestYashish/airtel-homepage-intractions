@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="160" height="60" viewBox="0 0 160 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="First Cell">
+<mask id="path-1-inside-1_0_12" fill="white">
+<path d="M0 30C0 13.4315 13.4315 0 30 0H130C146.569 0 160 13.4315 160 30V30C160 46.5685 146.569 60 130 60H30C13.4315 60 0 46.5685 0 30V30Z"/>
+</mask>
+<path d="M0 30C0 13.4315 13.4315 0 30 0H130C146.569 0 160 13.4315 160 30V30C160 46.5685 146.569 60 130 60H30C13.4315 60 0 46.5685 0 30V30Z" fill="url(#paint0_linear_0_12)"/>
+<path d="M0 30M160 30M160 30M0 30M30 0V2H130V0V-2H30V0ZM160 30M130 60V58H30V60V62H130V60ZM0 30M30 60V58C14.536 58 2 45.464 2 30H0H-2C-2 47.6731 12.3269 62 30 62V60ZM160 30H158C158 45.464 145.464 58 130 58V60V62C147.673 62 162 47.6731 162 30H160ZM130 0V2C145.464 2 158 14.536 158 30H160H162C162 12.3269 147.673 -2 130 -2V0ZM30 0V-2C12.3269 -2 -2 12.3269 -2 30H0H2C2 14.536 14.536 2 30 2V0Z" fill="white" mask="url(#path-1-inside-1_0_12)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_12" x1="80" y1="0" x2="80" y2="60" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F0F4F9"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

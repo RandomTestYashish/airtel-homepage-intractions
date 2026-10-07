@@ -1,0 +1,442 @@
+/*
+ * V5's All page. Like the Prepaid page its sections share the page scroller with
+ * the home sections, and the page's data-view decides which set is shown.
+ * Spacing mirrors the Figma frame's y positions.
+ */
+
+.page[data-view="all"] > .all5 {
+  display: block;
+  animation: pp-in var(--dur-large) var(--ease-out) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-view="all"] > .all5 {
+    animation: none;
+  }
+}
+
+/* ---------- Claim Rewards ---------- */
+/* Starts in the red tab's own pink, so the tab and the hero read as one piece. */
+.claim5 {
+  position: relative;
+  height: 331px;
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #fdd9d9, #fffdfd);
+}
+
+.claim5__gift {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.claim5__gift img {
+  flex: none;
+  object-fit: cover;
+}
+
+.claim5__gift--left {
+  top: -11px;
+  left: -100.23px;
+  width: 151.71px;
+  height: 157.61px;
+}
+
+.claim5__gift--left img {
+  width: 105.16px;
+  height: 121.28px;
+  rotate: 30deg;
+}
+
+.claim5__gift--right {
+  top: -4px;
+  left: 327.66px;
+  width: 88.67px;
+  height: 92.12px;
+}
+
+.claim5__gift--right img {
+  width: 61.46px;
+  height: 70.88px;
+  transform: rotate(150deg) scaleY(-1);
+}
+
+.claim5__gift--small {
+  top: 1px;
+  left: 109.25px;
+  width: 29.5px;
+  height: 30.64px;
+}
+
+.claim5__gift--small img {
+  width: 20.45px;
+  height: 23.58px;
+  rotate: 30deg;
+}
+
+/* Two stacked copies: a soft blurred one sits 7px under the crisp gradient one */
+.claim5__title {
+  position: absolute;
+  top: 32px; /* centres the crisp line 54px down */
+  left: calc(50% + 5.5px);
+  display: grid;
+  translate: -50% 0;
+  font-size: 34.536px;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 44.404px;
+  white-space: nowrap;
+}
+
+.claim5__title span {
+  grid-area: 1 / 1;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.claim5__title span:first-child {
+  translate: 0 6.9px;
+  background-image: linear-gradient(103.27deg, rgba(211, 35, 40, 0.2) 1.98%, rgba(121, 3, 3, 0.2) 109.12%);
+  filter: blur(2.467px);
+}
+
+.claim5__title span:last-child {
+  background-image: linear-gradient(118.98deg, rgb(250, 35, 59) 45.69%, rgb(0, 0, 0) 103.94%);
+}
+
+.claim5__subtitle {
+  position: absolute;
+  top: 76px;
+  left: calc(50% + 6px);
+  translate: -50% 0;
+  padding-left: 7px; /* balances the tracking after the last letter */
+  font-size: var(--fs-12);
+  line-height: var(--lh-18);
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #c31b2e;
+}
+
+.claim5__cards {
+  position: absolute;
+  top: 127px;
+  left: 0;
+  padding-bottom: 12px; /* room for the tiles' shadow inside the rail's clip */
+}
+
+/* The tiles sit on a light surface here, not on the old dark artwork */
+.claim5 .showcase-tile {
+  border-color: var(--color-border-card);
+  background: linear-gradient(to bottom, var(--color-card-start), var(--color-card-stop));
+  box-shadow: none;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.04));
+  color: var(--color-text);
+}
+
+.claim5 .showcase-tile__logo {
+  flex: none;
+  -webkit-mask: url("../assets/all5-logo-mask.svg") center / 100% 100% no-repeat;
+  mask: url("../assets/all5-logo-mask.svg") center / 100% 100% no-repeat;
+}
+
+.claim5 .showcase-tile__cta {
+  color: var(--color-link);
+}
+
+/* ---------- Recommended for you ---------- */
+.page[data-view="all"] > .reco5 {
+  margin-top: 9.5px;
+}
+
+.reco5__title {
+  margin-bottom: 14px;
+}
+
+.reco5-card {
+  position: relative;
+  width: 259px;
+  height: 125px;
+  border-radius: var(--radius-lg);
+  text-align: left;
+}
+
+.reco5-card--family {
+  background: linear-gradient(to bottom, #dde8f9 25%, #f3f3f3);
+  color: #3c567e;
+}
+
+.reco5-card--secure {
+  background: linear-gradient(to bottom, #fef1ec 25%, #fcfdff);
+  color: #333;
+}
+
+.reco5-card__title {
+  position: absolute;
+  top: 15px;
+  left: 17px;
+  width: 125px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: var(--lh-18);
+}
+
+.reco5-card__body {
+  position: absolute;
+  left: 18px;
+  top: 69px;
+  width: 183px;
+  font-size: var(--fs-14);
+  line-height: var(--lh-20);
+}
+
+.reco5-card--secure .reco5-card__body {
+  left: 16px;
+  top: 59px;
+}
+
+.reco5-card__arrow {
+  position: absolute;
+  top: 87.5px;
+  left: 228.5px;
+}
+
+.reco5-card__logo {
+  position: absolute;
+  top: 19px;
+  left: 16px;
+}
+
+.reco5-card__people i {
+  position: absolute;
+  top: 12px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px dashed #9cbff6;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle at 54% 50%, #fff, #e6f0ff);
+  font-style: normal;
+}
+
+.reco5-card__people i:nth-child(1) {
+  left: 208px;
+}
+
+.reco5-card__people i:nth-child(2) {
+  left: 180px;
+}
+
+.reco5-card__people .reco5-card__you {
+  left: 149px;
+  border-style: solid;
+  background: #9cbff6;
+  font-size: var(--fs-14);
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+/* ---------- Exclusive add-ons ---------- */
+.page[data-view="all"] > .addons5 {
+  margin-top: 18px;
+}
+
+.addons5__art {
+  display: block;
+  width: 371px;
+  height: 185px;
+  object-fit: cover;
+}
+
+/* ---------- My services ---------- */
+.page[data-view="all"] > .services5 {
+  margin-top: 19px;
+}
+
+/* These two titles are set wider than the rest in the Figma frame */
+.title5 .section-title__text {
+  letter-spacing: 2.76px;
+}
+
+.service5 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-full);
+  text-align: left;
+}
+
+.service5__avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.service5__text {
+  flex: 1;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  letter-spacing: 1px;
+}
+
+.service5__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: var(--lh-18);
+}
+
+.service5__sub {
+  font-size: var(--fs-12);
+  line-height: var(--lh-18);
+  color: var(--color-success);
+}
+
+/* ---------- Explore Airtel services ---------- */
+.page[data-view="all"] > .explore5 {
+  margin-top: 59px; /* 61px in Figma, less the service card's 2px of border */
+}
+
+.explore5__grid {
+  row-gap: 16px;
+  align-items: start;
+}
+
+.explore5__grid .icon-action {
+  letter-spacing: 1px;
+  overflow-wrap: anywhere; /* "International" breaks inside the 74px column, as in Figma */
+}
+
+/* A small label pinned over the bottom edge of the disc */
+.icon-action__tag {
+  position: absolute;
+  z-index: 2;
+  top: 46px;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 18px;
+  padding-left: 2px; /* balances the tracking after the last letter */
+  border-radius: 20px;
+  translate: -50% 0;
+  background: #000;
+  font-size: 7px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/* The double-width action: a pill with a logo and an offer inside it */
+.icon-action--wide {
+  grid-column: span 2;
+  width: 160px;
+  margin-left: 6px;
+}
+
+.icon-action__pill {
+  position: relative;
+  flex: none;
+  width: 160px;
+  height: 60px;
+  filter: var(--shadow-icon);
+}
+
+.icon-action__pill::before,
+.icon-action__pill::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: var(--radius-full);
+  translate: -50% -50%;
+}
+
+.icon-action__pill::before {
+  width: 164px;
+  height: 64px;
+  border: 2px solid var(--color-surface-subtle);
+}
+
+.icon-action__pill::after {
+  width: 160px;
+  height: 60px;
+  border: 2px solid #fff;
+  background: linear-gradient(to bottom, var(--color-surface-subtle), #fff);
+}
+
+.icon-action__swooshes {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+}
+
+.icon-action__swooshes i {
+  position: absolute;
+  width: 153.5px;
+  height: 14.927px;
+}
+
+.icon-action__swooshes i:first-child {
+  top: 8.75px;
+  left: 56.26px;
+  rotate: 15.38deg;
+}
+
+.icon-action__swooshes i:last-child {
+  top: -1.25px;
+  left: 76.25px;
+  rotate: -5.53deg;
+}
+
+.icon-action__swooshes img {
+  position: absolute;
+  top: -70.31%;
+  left: -6.84%;
+  width: 113.68%;
+  height: 240.65%;
+}
+
+.icon-action__upi {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: calc(50% - 52px);
+  translate: -50% -50%;
+}
+
+.icon-action__offer {
+  position: absolute;
+  z-index: 1;
+  top: 28px;
+  left: calc(50% - 27px);
+  width: 82px;
+  translate: 0 -50%;
+  font-size: var(--fs-14);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: 1px;
+  text-align: left;
+  color: var(--color-success);
+}
+
+/* ---------- Buy Airtel products ---------- */
+.page[data-view="all"] > .products5 {
+  margin-top: 14px;
+}

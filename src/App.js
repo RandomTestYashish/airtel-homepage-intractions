@@ -13,7 +13,9 @@ import { IconActionGrid } from "./components/IconActionGrid.js";
 import { IllustrativeGrid } from "./components/IllustrativeGrid.js";
 import { MyServices } from "./components/MyServices.js";
 import { NextBestAction } from "./components/NextBestAction.js";
+import { AllPageV5 } from "./components/AllPageV5.js";
 import { PhoneFrame } from "./components/PhoneFrame.js";
+import { PrepaidPage } from "./components/PrepaidPage.js";
 import { ProductShowcase } from "./components/ProductShowcase.js";
 import { StatusBar } from "./components/StatusBar.js";
 import { VariantSwitch } from "./components/VariantSwitch.js";
@@ -41,6 +43,8 @@ const HEADER_HEIGHT = 72;
 const TABS_COMPACT_AT = 16; // scrolling past this shrinks the tabs…
 const TABS_NORMAL_AT = 9; // …and they stay small until the page is back up here
 const NAV_SHRUNK = 0.86; // V4: how small the bottom nav bar gets while the page is scrolling
+const TABS_INSET = 16; // where the first category tab starts…
+const TABS_INSET_V5 = 24; // …and where it starts in V5, whose tabs are spaced wider
 
 export function App() {
   const { stage, screen } = PhoneFrame();
@@ -61,7 +65,24 @@ export function App() {
     YouMightLike(),
     FeaturingFresh(),
     ProductShowcase(),
+    ...AllPageV5({ products: BUY_PRODUCTS }),
+    ...PrepaidPage(),
   );
+
+  // V1–V4 show the home sections whatever tab is selected. V5 has its own pages
+  // under the tabs: the Prepaid page for Prepaid, and its All page for the rest.
+  const PREPAID_TAB = 1;
+  let selectedTab = 0;
+  function showView() {
+    const view = screen.dataset.variant !== "5" ? "home" : selectedTab === PREPAID_TAB ? "prepaid" : "all";
+    if (page.dataset.view === view) return;
+    page.dataset.view = view;
+    page.scrollTop = 0; // a different page starts from its top
+  }
+  tabs.addEventListener("tabchange", (event) => {
+    selectedTab = event.detail.index;
+    showView();
+  });
 
   // The header's menu button opens the side drawer over the home screen; while it
   // is open, everything behind it is taken out of the tab order.
@@ -136,6 +157,10 @@ export function App() {
   let navAway = false;
   function setVariant(variant) {
     screen.dataset.variant = variant;
+    // V5 spaces the category tabs differently and starts the page a little higher.
+    tabs.relayout(variant === "5" ? TABS_INSET_V5 : TABS_INSET);
+    if (screen.isConnected) measureChrome();
+    showView();
     // Carry the nav's current state over to however this version shows it.
     screen.dataset.nav = navAway && !shrinksNav() ? "hidden" : "visible";
     animate(bottomNav, { y: navAway && !shrinksNav() ? "110%" : "0%" }, transition("bar"));
@@ -185,7 +210,8 @@ export function App() {
 
   // V2 changes how the category tabs look once scrolled (sections.css); V3 is V1 with
   // glass surfaces on the header, tabs and bottom nav (chrome.css); V4 is V1 with a
-  // bottom nav that shrinks in place instead of hiding.
+  // bottom nav that shrinks in place instead of hiding; V5 has the new top nav, whose
+  // selected tab is a folder-tab shape, and on scroll keeps only the titles, as V2 does.
   stage.append(VariantSwitch({ onChange: setVariant }));
 
   revealOnScroll(page);

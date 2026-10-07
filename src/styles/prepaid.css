@@ -1,0 +1,592 @@
+/*
+ * The Prepaid tab's page (V5). Its sections sit in the same scroller as the home
+ * sections and the page's data-view decides which set is shown. Spacing mirrors
+ * the Figma frame's y positions.
+ */
+
+.pp,
+.all5,
+.page[data-view="prepaid"] > section:not(.pp),
+.page[data-view="all"] > section:not(.all5) {
+  display: none;
+}
+
+.page[data-view="prepaid"] > .pp {
+  display: block;
+  /* Above the hero's glow, which runs on behind the next few sections */
+  position: relative;
+  z-index: 1;
+  animation: pp-in var(--dur-large) var(--ease-out) backwards;
+}
+
+@keyframes pp-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page[data-view="prepaid"] > .pp {
+    animation: none;
+  }
+}
+
+/* ---------- Hero: connection status, SIM, number ---------- */
+.page[data-view="prepaid"] > .pp-hero {
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 43px 0 12px; /* 31px to the snapshot block plus its own 12px inset */
+  text-align: center;
+}
+
+/* A soft, blurred wash of colour behind the hero and the sections after it */
+.pp-hero__glow {
+  position: absolute;
+  z-index: -1;
+  top: 32px;
+  left: 0;
+  width: var(--screen-w);
+  height: 570px;
+  overflow: hidden;
+  opacity: 0.6;
+  filter: blur(59px);
+  pointer-events: none;
+}
+
+.pp-hero__glow img {
+  position: absolute;
+  top: -8.38%;
+  left: 4.27%;
+  width: 91.47%;
+  height: 106.94%;
+}
+
+.pp-hero__rings {
+  position: absolute;
+  z-index: -1;
+  top: -4px;
+  left: 66px;
+  width: 244px;
+  height: 244px;
+  pointer-events: none;
+}
+
+.pp-hero__rings i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  translate: -50% -50%;
+}
+
+.pp-hero__rings i:nth-child(1) {
+  width: 194.6px;
+  height: 194.6px;
+  border: 1.04px dashed rgba(0, 188, 125, 0.2);
+  opacity: 0.4;
+}
+
+.pp-hero__rings i:nth-child(2) {
+  width: 163.6px;
+  height: 163.6px;
+  border: 0.96px solid rgba(0, 212, 146, 0.25);
+  opacity: 0.6;
+}
+
+.pp-hero__rings i:nth-child(3) {
+  width: 130.3px;
+  height: 130.3px;
+  border: 0.85px solid rgba(0, 212, 146, 0.2);
+  opacity: 0.7;
+}
+
+.pp-hero__rings i:nth-child(4) {
+  width: 99px;
+  height: 99px;
+  border: 0.74px solid rgba(0, 188, 125, 0.15);
+}
+
+.pp-hero__rings i:nth-child(5) {
+  width: 79.2px;
+  height: 79.2px;
+  background: rgba(0, 188, 125, 0.1);
+  filter: blur(4.95px);
+}
+
+.pp-hero__status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-12);
+  font-weight: 700;
+  line-height: var(--lh-14);
+  color: var(--color-success);
+}
+
+.pp-hero__status span {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+}
+
+.pp-hero__sim {
+  width: 96px;
+  height: 96px;
+  margin-top: 12px;
+  object-fit: cover;
+}
+
+.pp-hero__title {
+  margin-top: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.pp-hero__number {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.pp-hero__caption {
+  margin-top: 8px;
+  font-size: var(--fs-14);
+  line-height: var(--lh-20);
+  color: var(--color-ghost-text);
+}
+
+/* ---------- Quick actions ---------- */
+.pp-actions {
+  margin-top: 12px;
+  padding-inline: var(--gutter);
+}
+
+.icon-actions--row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.icon-actions--row .icon-action {
+  width: 64px;
+  min-height: 100px;
+  line-height: var(--lh-16);
+}
+
+.icon-action__glyph--flip img {
+  transform: scaleX(-1);
+}
+
+/* ---------- Shared pieces ---------- */
+.pp-title {
+  margin-bottom: 12px;
+}
+
+.section--bleed > .pp-title {
+  padding-inline: var(--gutter);
+}
+
+.pp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 20px;
+  font-size: var(--fs-14);
+  font-weight: 500;
+  line-height: var(--lh-16);
+  white-space: nowrap;
+  color: var(--color-link);
+}
+
+.pp-link img {
+  transition: transform var(--dur-standard) var(--ease-out);
+}
+
+.pressable:active .pp-link img {
+  transform: translateX(2px);
+}
+
+.pp-rail {
+  /* Room for the cards' soft shadow inside the rail's clip */
+  padding-bottom: 12px;
+  margin-bottom: -12px;
+}
+
+/* ---------- Rewards & benefits ---------- */
+.pp-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 158px;
+  height: 180px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.04));
+  text-align: left;
+  color: var(--color-text);
+}
+
+.pp-tile__logo {
+  position: relative;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+}
+
+.pp-tile__logo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pp-tile__logo .pp-tile__mark {
+  width: auto;
+  height: auto;
+}
+
+.pp-tile__masked {
+  object-fit: cover;
+  -webkit-mask: url("../assets/pp-logo-adobe-mask.svg") center / 100% 100% no-repeat;
+  mask: url("../assets/pp-logo-adobe-mask.svg") center / 100% 100% no-repeat;
+}
+
+.pp-tile__text,
+.pp-tile__title,
+.pp-tile__body {
+  display: block;
+  width: 100%;
+}
+
+.pp-tile__text {
+  margin-bottom: -4px; /* 8px, not 12px, between the text and the link */
+}
+
+.pp-tile__title {
+  font-size: var(--fs-14);
+  font-weight: 700;
+  line-height: var(--lh-20);
+}
+
+.pp-tile__body {
+  margin-top: 4px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-18);
+  white-space: pre-line;
+}
+
+/* ---------- Prepaid benefits ---------- */
+.pp-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-inline: var(--gutter);
+}
+
+.pp-heading .section-title__text {
+  line-height: var(--lh-14);
+}
+
+.pp-heading__sub {
+  margin-top: 4px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-18);
+  color: var(--color-text-caption);
+}
+
+/* Carousel position: one bar for the current card, a dot for each of the others */
+.pp-pager {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 14px;
+}
+
+.pp-pager i {
+  width: 3px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-caption);
+}
+
+.pp-pager i:first-child {
+  width: 10px;
+}
+
+.pp-benefit {
+  width: 303px;
+  height: 182px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.pp-benefit img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Usage ---------- */
+.pp-usage {
+  margin-bottom: 28px; /* the Figma frame leaves 60px, not 32px, before the packs */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(137.87deg, var(--color-card-start) 1.84%, var(--color-card-stop) 100%);
+}
+
+.pp-usage__figure {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: -4px; /* 16px, not 20px, down to the meter */
+}
+
+.pp-usage__figure strong {
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 60px;
+}
+
+.pp-usage__figure span {
+  padding-block: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.pp-meter {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+
+.pp-meter__label {
+  font-size: var(--fs-12);
+  font-weight: 700;
+  line-height: var(--lh-14);
+}
+
+.pp-meter__track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  background: var(--color-border-card);
+}
+
+.pp-meter__track span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(to bottom, #00c94e, #006326);
+}
+
+.pp-meter__hints {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-18);
+  color: var(--color-text-caption);
+}
+
+.pp-usage__facts {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.pp-usage__facts span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-12);
+  font-weight: 500;
+  line-height: var(--lh-14);
+  white-space: nowrap;
+}
+
+.pp-usage__facts img {
+  box-sizing: content-box;
+  padding: 2px;
+}
+
+.pp-usage__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.pp-usage__buttons .btn {
+  flex: none;
+  width: 100%;
+  height: 48px;
+  padding-inline: 12px;
+}
+
+/* ---------- Current pack ---------- */
+.page[data-view="prepaid"] > .pp:last-of-type {
+  margin-bottom: 32px;
+}
+
+.pp-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+}
+
+.pp-plan__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: -4px; /* 12px, not 16px, down to the details */
+}
+
+.pp-plan__price {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.pp-plan__price strong {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: var(--lh-20);
+}
+
+.pp-plan__price span {
+  font-size: var(--fs-14);
+  line-height: var(--lh-16);
+  color: var(--color-text-caption);
+}
+
+.pp-plan__sub {
+  margin-top: 4px;
+  font-size: var(--fs-12);
+  line-height: var(--lh-14);
+  color: var(--color-text-caption);
+}
+
+.pp-tag {
+  padding: 2px 8px;
+  border: 1px solid #a3dfb9;
+  border-radius: var(--radius-xs);
+  background: #d1efdc;
+  font-size: var(--fs-11);
+  font-weight: 700;
+  line-height: var(--lh-14);
+  color: var(--color-success);
+}
+
+.pp-plan__pairs {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 303px;
+  margin: 0;
+}
+
+.pp-plan__pairs > div {
+  flex: 1;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.pp-plan__pairs dd {
+  margin: 0;
+  font-size: var(--fs-14);
+  font-weight: 700;
+  line-height: var(--lh-16);
+  white-space: nowrap;
+}
+
+.pp-plan__pairs dt {
+  font-size: var(--fs-12);
+  line-height: var(--lh-14);
+  color: var(--color-text-title);
+}
+
+.pp-otts {
+  display: flex;
+}
+
+.pp-otts span {
+  position: relative;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin-right: -6px;
+  border-radius: var(--radius-full);
+}
+
+.pp-otts img {
+  position: absolute;
+  inset: 0;
+}
+
+/* Layers of one logo, inset as in the Figma component (2.5% and 18.87% of 24px) */
+.pp-otts .pp-otts__fill {
+  inset: 0.6px;
+  width: 22.8px;
+  height: 22.8px;
+}
+
+.pp-otts .pp-otts__netflix {
+  inset: 4.53px;
+  width: 14.94px;
+  height: 14.94px;
+  object-fit: cover;
+}
+
+.pp-otts .pp-otts__more {
+  display: grid;
+  place-items: center;
+  margin-right: 0;
+  border: 1px solid var(--color-surface-pressed);
+  background: var(--color-border-card);
+  font-size: var(--fs-11);
+  font-weight: 400;
+  line-height: var(--lh-12);
+  color: var(--color-link);
+}
+
+.pp-plan__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pp-plan__actions .pp-link {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.btn--secondary {
+  padding-inline: 12px;
+  border-color: #000;
+  background: #f6f6f6;
+  color: var(--color-text);
+}

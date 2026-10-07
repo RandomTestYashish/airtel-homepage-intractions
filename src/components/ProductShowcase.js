@@ -1,13 +1,13 @@
 import { asset, el } from "../lib/dom.js";
 import { createRail } from "../lib/rail.js";
 
-const BENEFITS = [
+export const BENEFITS = [
   { title: "Adobe Express", body: "12 months for FREE worth ₹4000", cta: "CLAIM NOW", logo: "sc-logo-adobe.png" },
   { title: "Netflix", body: "1 month FREE\nworth ₹999", cta: "CLAIM NOW", logo: "sc-logo-netflix.png" },
   { title: "Lorem ipsum", body: "Lorem ipsum dolor sit amet consectetur.", cta: "BUTTON", logo: "sc-logo-default.png" },
 ];
 
-function ShowcaseTile({ title, body, cta, logo }) {
+export function ShowcaseTile({ title, body, cta, logo, arrow = "arrow-right-16.svg" }) {
   return `
     <button class="showcase-tile pressable" type="button">
       <img class="showcase-tile__logo" src="${asset(logo)}" alt="" />
@@ -15,7 +15,7 @@ function ShowcaseTile({ title, body, cta, logo }) {
         <span class="showcase-tile__title">${title}</span>
         <span class="showcase-tile__body">${body}</span>
       </span>
-      <span class="showcase-tile__cta">${cta}<span><img src="${asset("arrow-right-16.svg")}" alt="" /></span></span>
+      <span class="showcase-tile__cta">${cta}<span><img src="${asset(arrow)}" alt="" /></span></span>
     </button>
   `;
 }

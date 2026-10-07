@@ -14,12 +14,13 @@ const ACTIONS = [
 
 const moreGlyph = `<span class="icon-more"><i></i><i></i><i></i><i></i></span>`;
 
-function IconAction({ label, icon, highlight }) {
+export function IconAction({ label, icon, highlight, flip, tag }) {
   return `
     <button class="icon-action" type="button" data-press="0.94">
       <span class="icon-action__disc" data-press-target>
         ${highlight ? `<img class="icon-action__ring" src="${asset("ib-flourish.svg")}" alt="" />` : ""}
-        <span class="icon-action__glyph">${icon ? `<img src="${asset(icon)}" alt="" />` : moreGlyph}</span>
+        <span class="icon-action__glyph${flip ? " icon-action__glyph--flip" : ""}">${icon ? `<img src="${asset(icon)}" alt="" />` : moreGlyph}</span>
+        ${tag ? `<span class="icon-action__tag">${tag}</span>` : ""}
       </span>
       <span>${label}</span>
     </button>
