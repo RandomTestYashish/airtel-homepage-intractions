@@ -3,7 +3,7 @@ import { animate, transition } from "../lib/motion.js";
 import { createRail } from "../lib/rail.js";
 
 const TABS = [
-  { label: "All", icon: "tab-all.svg", filled: "tab5-all-filled.svg" },
+  { label: "All", icon: "tab-all.svg", iconV5: "tab5-all-outline.svg", filled: "tab5-all-filled.svg" },
   { label: "Prepaid", icon: "tab-prepaid.svg", filled: "tab5-prepaid-filled.svg" },
   { label: "Postpaid", icon: "tab-postpaid.svg", ribbon: "Unlimited", ribbonV5: "Priority" },
   { label: "Wi-Fi", icon: "tab-wifi.svg" },
@@ -49,7 +49,7 @@ export function CategoryTabs() {
             <stop stop-color="#fff" /><stop offset="1" stop-color="#FDD9D9" />
           </linearGradient>
           <linearGradient id="tab5-fill-blue" x1="0" y1="0" x2="0" y2="112.7" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#fff" /><stop offset="1" stop-color="#F1F8FA" stop-opacity="0" />
+            <stop stop-color="#fff" /><stop offset="0.55" stop-color="#F2F8FA" /><stop offset="1" stop-color="#E1EEF5" />
           </linearGradient>
           ${boxLine("tab5-line-red", "#FB5C74", "#FA233B")}
           ${boxLine("tab5-line-blue", "#9CBFF6", "#9CBFF6")}
@@ -71,7 +71,9 @@ export function CategoryTabs() {
                      <span class="category-tab__ribbon-text category-tab__ribbon-text--v5">${tab.ribbonV5}</span>`
                   : ""
               }
-              <span class="category-tab__icon"><img src="${asset(tab.icon)}" alt="" /></span>
+              <span class="category-tab__icon"><img src="${asset(tab.icon)}" alt="" />${
+                tab.iconV5 ? `<img class="category-tab__icon-v5" src="${asset(tab.iconV5)}" alt="" />` : ""
+              }</span>
               ${
                 tab.filled
                   ? `<span class="category-tab__icon category-tab__icon--filled"><img src="${asset(tab.filled)}" alt="" /></span>`
