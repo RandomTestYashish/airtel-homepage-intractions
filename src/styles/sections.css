@@ -173,6 +173,16 @@
   opacity: 0;
 }
 
+/* V5 draws some unselected icons differently: the outlined home on "All" */
+.category-tab__icon-v5,
+[data-variant="5"] .category-tab__icon:has(.category-tab__icon-v5) img:not(.category-tab__icon-v5) {
+  display: none;
+}
+
+[data-variant="5"] .category-tab__icon-v5 {
+  display: block;
+}
+
 [data-variant="5"] .category-tab__ribbon-text.category-tab__ribbon-text--v5 {
   display: block;
 }
