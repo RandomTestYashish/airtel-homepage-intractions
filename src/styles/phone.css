@@ -107,6 +107,10 @@
   border: 0;
 }
 
+.variant-switch[hidden] {
+  display: none;
+}
+
 .variant-switch__button {
   display: flex;
   align-items: baseline;

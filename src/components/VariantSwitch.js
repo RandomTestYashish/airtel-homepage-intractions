@@ -1,12 +1,16 @@
 import { el } from "../lib/dom.js";
 
-const VARIANTS = [
+const ALL_VARIANTS = [
   { id: "1", name: "V1", text: "Top nav small icons" },
   { id: "2", name: "V2", text: "Top nav only titles" },
   { id: "3", name: "V3", text: "Glass effect" },
   { id: "4", name: "V4", text: "Bottom nav shrinks" },
   { id: "5", name: "V5", text: "New top nav" },
 ];
+// Only V1 is published. The other versions stay in the code but are not offered here
+// and cannot be opened with `?v=`.
+const PUBLISHED = ["1"];
+const VARIANTS = ALL_VARIANTS.filter((variant) => PUBLISHED.includes(variant.id));
 
 /**
  * Preview control for switching between versions of the prototype. The choice
@@ -30,6 +34,7 @@ export function VariantSwitch({ onChange }) {
     </fieldset>
   `);
 
+  group.hidden = VARIANTS.length < 2; // nothing to switch between
   const buttons = [...group.querySelectorAll("button")];
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
