@@ -49,7 +49,7 @@ export function CategoryTabs() {
             <stop stop-color="#fff" /><stop offset="1" stop-color="#FDD9D9" />
           </linearGradient>
           <linearGradient id="tab5-fill-blue" x1="0" y1="0" x2="0" y2="112.7" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#fff" /><stop offset="0.55" stop-color="#F2F8FA" /><stop offset="1" stop-color="#E1EEF5" />
+            <stop stop-color="#fff" /><stop offset="0.6" stop-color="#fff" /><stop offset="0.8" stop-color="#F7FBFC" /><stop offset="1" stop-color="#F1F8FB" />
           </linearGradient>
           ${boxLine("tab5-line-red", "#FB5C74", "#FA233B")}
           ${boxLine("tab5-line-blue", "#9CBFF6", "#9CBFF6")}
