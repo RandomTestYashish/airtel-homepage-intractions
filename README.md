@@ -18,7 +18,7 @@ Then open http://localhost:3000.
 On a desktop browser the screen is shown inside an iPhone mockup. On a phone the mockup is dropped and
 the screen fills the browser. Add `?view=mobile` or `?view=mockup` to the URL to force either mode.
 
-Only **V1** and **V4** are published at the moment: `PUBLISHED` in `src/components/VariantSwitch.js` lists the versions
+Only **V1** and **V5** are published at the moment: `PUBLISHED` in `src/components/VariantSwitch.js` lists the versions
 that are offered (with a single one the switch is hidden). With all five listed, the versions are switchable from the buttons at the top left of the desktop preview, from the small
 V1 / V2 / V3 / V4 / V5 pill at the right edge on a phone, or with `?v=2` / `?v=3` / `?v=4` / `?v=5`:
 **V1** shrinks the category tab icons once the page is scrolled; **V2** hides them and keeps only the titles;

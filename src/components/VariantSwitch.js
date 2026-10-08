@@ -7,9 +7,9 @@ const ALL_VARIANTS = [
   { id: "4", name: "V4", text: "Bottom nav shrinks" },
   { id: "5", name: "V5", text: "New top nav" },
 ];
-// Only V1 and V4 are published. The other versions stay in the code but are not offered
+// Only V1 and V5 are published. The other versions stay in the code but are not offered
 // here and cannot be opened with `?v=`.
-const PUBLISHED = ["1", "4"];
+const PUBLISHED = ["1", "5"];
 const VARIANTS = ALL_VARIANTS.filter((variant) => PUBLISHED.includes(variant.id));
 
 /**
